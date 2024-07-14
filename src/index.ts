@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3000;
 // Einfache Benutzerroute
 app.get('/user', async (req, res) => {
   try {
-    // Hier kannst du auf deine Sequelize-Modelle zugreifen und Daten aus der Datenbank abrufen
+    // Hier kann man auf seine Sequelize-Modelle zugreifen und Daten aus der Datenbank abrufen.
     const users = await todoSequelize.models.User.findAll();
     res.json(users);
   } catch (error) {
