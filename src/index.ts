@@ -1,19 +1,21 @@
+import express from 'express';
 import todoSequelize from './database/setup/database';
-import server from './server';
 
-// const { PORT } = process.env;
-const PORT = process.env.PORT;
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-todoSequelize
-  .sync()
-  .then(() => {
-    console.log('DB has been successfully initialized');
-  })
-  .catch((e) => {
-    console.log(e);
-  });
+// Einfache Benutzerroute
+app.get('/user', async (req, res) => {
+  try {
+    // Hier kannst du auf deine Sequelize-Modelle zugreifen und Daten aus der Datenbank abrufen
+    const users = await todoSequelize.models.User.findAll();
+    res.json(users);
+  } catch (error) {
+    console.error('Fehler beim Abrufen der Benutzerdaten:', error);
+    res.status(500).send('Ein Fehler ist aufgetreten.');
+  }
+});
 
-// App hört im folgenden auf den Port, welcher über die Umgebungsvariable definiert ist
-server.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Server läuft auf Port ${PORT}`);
 });
