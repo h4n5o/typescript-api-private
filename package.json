@@ -2,7 +2,7 @@
   "name": "typescript-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "build/src/server.ts",
   "scripts": {
     "test": "DOTENV_CONFIG_PATH=.test.env jest",
     "dev": "nodemon",
@@ -10,7 +10,9 @@
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint 'src/**/*.{ts,tsx}' --fix",
     "prettier": "prettier --write .",
-    "prettier:check": "prettier --check ."
+    "prettier:check": "prettier --check .",
+    "tsoa": "tsoa spec-and-routes && tsc",
+    "start": "node build/src/server.js"
   },
   "keywords": [],
   "author": "",
